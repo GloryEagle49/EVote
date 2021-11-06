@@ -5,6 +5,123 @@
         header('location:authpage.html');
     };
     $user_id=$_SESSION['active_user_id'];
-    $query_my_data = $conn->query("SELECT * FROM users WHERE sn='$user_id'");
+    $query_my_data = $conn->query("SELECT * FROM users WHERE id='$user_id'");
     $my_data= $query_my_data->fetch_array();
+    $user_level = $my_data['usertype'];
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/tailwind.css">
+    <link rel="stylesheet" href="../assets/fa/css/all.css">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/material_icon/material-icons.css">
+    <title><?php echo $title?></title>
+</head>
+<body class="" style="font-family:'Bahnschrift">
+    <div class="sidenav -ml-72 md:ml-0 w-72 z-20 flex flex-col fixed bg-gray-100 h-full overflow-y-auto shadow-md py-5">
+        <div class="flex py-9 justify-center">
+            <div class="flex items-center gap-2">
+                <div class="h-12 w-12 mx-auto rounded-full bg-white"></div>
+                <div class="text-2xl font-bold text-blue-800 ">E-Voting</div>
+            </div>
+        </div>
+        <div class="flex-grow">
+            <div class="w-full">
+                <a href="index.php" class="">
+                    <div class="py-4 px-3 w-full hover:bg-white text-gray-500 hover:text-blue-400 <?php if($title == 'Dashboard'){ echo 'border-r-2 border-blue-400 bg-gray-200';}?>">
+                        <i class="fa fa-tachometer-alt text-xs"></i> Dashborad
+                    </div>
+                </a>
+            </div>
+            <?php
+                if($user_level == '1'){
+                    ?>
+                        <div class="w-full">
+                            <a href="logReceipt.php" class="">
+                                <div class="py-4 px-3 w-full hover:bg-white text-gray-500 hover:text-blue-400 <?php if($title == 'Log Departmental Receipt'){ echo 'border-r-2 border-blue-400 bg-gray-200';}?>">
+                                    <i class="fa fa-vote-yea text-xs"></i> Log Departmental Receipt
+                                </div>
+                            </a>
+                        </div>
+                    <?php
+                }
+            ?>
+            <div class="w-full">
+                <a href="results.php" class="">
+                    <div class="py-4 px-3 w-full hover:bg-white text-gray-500 hover:text-blue-400 <?php if($title == 'Results'){ echo 'border-r-2 border-blue-400 bg-gray-200';}?>">
+                        <i class="fa fa-vote-yea text-xs"></i> View Results
+                    </div>
+                </a>
+            </div>
+            <div class="w-full">
+                <a href="settings.php" class="">
+                    <div class="py-4 px-3 w-full hover:bg-white text-gray-500 hover:text-blue-400 <?php if($title == 'Settings'){ echo 'border-r-2 border-blue-400 bg-gray-200';}?>">
+                        <i class="fa fa-cog text-xs"></i> Settings
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="">
+            <form name="auth" class="p-0 w-full flex flex-col">
+                <input type="hidden" name="action" value="logout">
+                <button class=" flex justify-center items-center text-gray-500 gap-x-3 w-auto">
+                    <span class="flex h-9 w-9 justify-center items-center text-white bg-blue-900 rounded-full">
+                        <i class="fa fa-sign-out-alt text-xs"></i>
+                    </span>
+                    Log Out
+                </button>
+            </form>
+        </div>
+        <div class="fixed w-screen lg:pr-9 md:pr-4 pr-2 py-4 top-0 right-0 lg:flex hidden justify-end">
+            <div class="flex gap-3">
+                <div class="flex items-center gap-3">
+                    <div class="flex flex-col items-end">
+                        <div class="">
+                            <span class="bg-blue-400 py-1 px-2 text-white rounded-full text-xs">
+                                level
+                            </span>
+                        </div>
+                        <div class="capitalize text-lg" style="font-family:'Bahnschrift'">firstname lastname</div>
+                    </div>
+                    <img src="../assets/images/avatars/3.jpeg" class="w-12 h-12 rounded-full" srcset="">
+                </div>
+                <div class="beller bg-white h-12 w-12 cursor-pointer relative flex justify-center items-center rounded-full">
+                    <i class="fa fa-bell text-xs" style="font-size:23px"></i>
+                    <div class="p-1 absolute border-2 top-3 right-3 border-white rounded-full bg-red-400"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sticky top-0 bg-white z-10 md:ml-72 pl-2 lg:pl-5">
+        <div class="lg:hidden">
+            <div class="flex gap-3 items-center">
+                <div class="flex items-center gap-3 order-2">
+                    <div class="flex flex-col order-2">
+                        <div class="">
+                            <span class="bg-blue-400 py-1 px-2 text-white rounded-full" style="font-size:10px">
+                                level
+                            </span>
+                        </div>
+                        <div class="capitalize text-sm" style="font-family:'Bahnschrift'">firstname lastname</div>
+                    </div>
+                    <img src="../assets/images/avatars/3.jpeg" class="w-8 h-8 rounded-full" srcset="">
+                </div>
+                <div class="beller bg-white h-8 w-8 cursor-pointer relative flex justify-center items-center rounded-full">
+                    <i class="fa fa-bell text-xs" style="font-size:13px"></i>
+                    <div class="absolute border-2 top-2 right-2 border-white rounded-full bg-red-400" style="padding:2px"></div>
+                </div>
+            </div>
+        </div>
+        <div class="text-lg md:text-2xl lg:text-4xl lg:py-5">
+            <?php echo $title ?>
+        </div>
+    </div>
+</body>
+<script src="../assets/js/jquery.js"></script>
+<script src="../assets/fa/js/all.js"></script>
+<script src="../assets/js/custom.js"></script>
+</html>
