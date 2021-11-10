@@ -8,6 +8,9 @@
     $query_my_data = $conn->query("SELECT * FROM users WHERE id='$user_id'");
     $my_data= $query_my_data->fetch_array();
     $user_level = $my_data['usertype'];
+    $query1 = $conn->query("SELECT * FROM votep ORDER BY sn DESC LIMIT 1");
+    $er=$query1->fetch_assoc();
+    $yr= $er['yr'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +25,7 @@
     <title><?php echo $title?></title>
 </head>
 <body class="" style="font-family:'Bahnschrift">
-    <div class="sidenav -ml-72 md:ml-0 w-72 z-20 flex flex-col fixed bg-gray-100 h-full overflow-y-auto shadow-md py-5">
+    <div class="sidenav -ml-72 transition-all duration-500 md:ml-0 w-72 z-20 flex flex-col fixed bg-gray-100 h-full overflow-y-auto shadow-md py-5">
         <div class="flex py-9 justify-center">
             <div class="flex items-center gap-2">
                 <div class="h-12 w-12 mx-auto rounded-full bg-white"></div>
@@ -32,18 +35,45 @@
         <div class="flex-grow">
             <div class="w-full">
                 <a href="index.php" class="">
-                    <div class="py-4 px-3 w-full hover:bg-white text-gray-500 hover:text-blue-400 <?php if($title == 'Dashboard'){ echo 'border-r-2 border-blue-400 bg-gray-200';}?>">
+                    <div class="py-4 px-3 w-full hover:bg-white text-gray-500 hover:text-blue-400 <?php if($title == 'Dashboard'){ echo 'border-r-4 border-blue-400 bg-gray-200';}?>">
                         <i class="fa fa-tachometer-alt text-xs"></i> Dashborad
                     </div>
                 </a>
             </div>
             <?php
-                if($user_level == '1'){
+                if($user_level == '2'){
                     ?>
                         <div class="w-full">
                             <a href="logReceipt.php" class="">
-                                <div class="py-4 px-3 w-full hover:bg-white text-gray-500 hover:text-blue-400 <?php if($title == 'Log Departmental Receipt'){ echo 'border-r-2 border-blue-400 bg-gray-200';}?>">
+                                <div class="py-4 px-3 w-full hover:bg-white text-gray-500 hover:text-blue-400 <?php if($title == 'Log Receipt'){ echo 'border-r-4 border-blue-400 bg-gray-200';}?>">
                                     <i class="fa fa-vote-yea text-xs"></i> Log Departmental Receipt
+                                </div>
+                            </a>
+                        </div>
+                    <?php
+                }elseif ($user_level == '3') {
+                    ?>
+                        <div class="w-full">
+                            <a href="RegisterContestant.php" class="">
+                                <div class="py-4 px-3 w-full hover:bg-white text-gray-500 hover:text-blue-400 <?php if($title == 'Register Contestant'){ echo 'border-r-4 border-blue-400 bg-gray-200';}?>">
+                                    <i class="fa fa-user-plus text-xs"></i> Register Contestant
+                                </div>
+                            </a>
+                        </div>
+                    <?php
+                }elseif ($user_level == '4') {
+                    ?>
+                        <div class="w-full">
+                            <a href="RegisterContestant.php" class="">
+                                <div class="py-4 px-3 w-full hover:bg-white text-gray-500 hover:text-blue-400 <?php if($title == 'Register Contestant'){ echo 'border-r-4 border-blue-400 bg-gray-200';}?>">
+                                    <i class="fa fa-user-plus text-xs"></i> Register Contestant
+                                </div>
+                            </a>
+                        </div>
+                        <div class="w-full">
+                            <a href="addPosition.php" class="">
+                                <div class="py-4 px-3 w-full hover:bg-white text-gray-500 hover:text-blue-400 <?php if($title == 'Add Position'){ echo 'border-r-4 border-blue-400 bg-gray-200';}?>">
+                                    <i class="fa fa-user-plus text-xs"></i> Add Position
                                 </div>
                             </a>
                         </div>
@@ -52,14 +82,14 @@
             ?>
             <div class="w-full">
                 <a href="results.php" class="">
-                    <div class="py-4 px-3 w-full hover:bg-white text-gray-500 hover:text-blue-400 <?php if($title == 'Results'){ echo 'border-r-2 border-blue-400 bg-gray-200';}?>">
-                        <i class="fa fa-vote-yea text-xs"></i> View Results
+                    <div class="py-4 px-3 w-full hover:bg-white text-gray-500 hover:text-blue-400 <?php if($title == 'Results'){ echo 'border-r-4 border-blue-400 bg-gray-200';} if($title == 'Vote Now'){ echo 'border-r-4 border-blue-400 bg-gray-200';}?>">
+                        <i class="fa fa-balance-scale text-xs"></i> View Results
                     </div>
                 </a>
             </div>
             <div class="w-full">
                 <a href="settings.php" class="">
-                    <div class="py-4 px-3 w-full hover:bg-white text-gray-500 hover:text-blue-400 <?php if($title == 'Settings'){ echo 'border-r-2 border-blue-400 bg-gray-200';}?>">
+                    <div class="py-4 px-3 w-full hover:bg-white text-gray-500 hover:text-blue-400 <?php if($title == 'Settings'){ echo 'border-r-4 border-blue-400 bg-gray-200';}?>">
                         <i class="fa fa-cog text-xs"></i> Settings
                     </div>
                 </a>
@@ -96,7 +126,7 @@
             </div>
         </div>
     </div>
-    <div class="sticky top-0 bg-white z-10 md:ml-72 pl-2 lg:pl-5">
+    <div class="sticky top-0 bg-white z-10 md:ml-72 pl-2 lg:pl-5 relative">
         <div class="lg:hidden">
             <div class="flex gap-3 items-center">
                 <div class="flex items-center gap-3 order-2">
@@ -115,6 +145,9 @@
                     <div class="absolute border-2 top-2 right-2 border-white rounded-full bg-red-400" style="padding:2px"></div>
                 </div>
             </div>
+        </div>
+        <div class="absolute bg-blue-500 rounded-lg border-2 cursor-pointer md:hidden bars text-white right-3 top-2 px-2" style="padding-top:5px">
+            <i class="fa fa-bars fa-2x"></i>
         </div>
         <div class="text-lg md:text-2xl lg:text-4xl lg:py-5">
             <?php echo $title ?>

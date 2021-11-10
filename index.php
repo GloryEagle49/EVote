@@ -7,7 +7,7 @@ include_once 'backend/nav.php';
         <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3 gap-3">
             <div class="py-4 bg-blue-700 shadow-lg rounded-lg text-white px-4 divide-y">
                 <div class="text-xs py-2">Total Number of eligible voters</div>
-                <div class="text-5xl py-3">230</div>
+                <div class="text-5xl py-3">2300</div>
             </div>
             <div class="py-4 bg-yellow-300 shadow-lg rounded-lg text-white px-4 divide-y">
                 <div class="text-xs py-2">Total Number of Vote</div>
@@ -24,16 +24,26 @@ include_once 'backend/nav.php';
             <div class="bg-blue-100 py-12  px-8 rounded-lg shadow-lg">
                 <div class="">
                     <div class="">Voting time left</div>
-                    <div class="text-4xl">00:00:00<span class="bg-red-400 relative bottom-1 text-white py-1 px-2 rounded-full text-xs">ended</span></div>
+                    <div class="text-4xl">
+                        <span>00:00:00</span>
+                        <span id="progressStatus"></span>
+                    </div>
                 </div>
                 <div class="capitalize text-gray-500">voting eligibility</div>
-                <div class="flex">
-                    <div class="flex-grow text-red-400">not eligible</div>
-                    <div class="">
-                        <a href="" class="bg-blue-700 text-gray-100 px-3 py-2 rounded-lg">
-                            vote now
-                        </a>
-                    </div>
+                <div class="flex relative">
+                    <?php
+                        $eligible = $conn->query("SELECT * FROM receiptlog2 WHERE userid='$user_id' AND yr='$yr'");
+                        if($eligible->num_rows > 1){
+                            ?>
+                                <div class="flex-grow text-green-400">eligible</div>
+                            <?php
+                        }else{
+                            ?>
+                                <div class="flex-grow text-red-400">not eligible</div>
+                            <?php
+                        }
+                    ?>
+                    <div id="voteBtn"></div>
                 </div>
             </div>
          </div>
@@ -115,3 +125,51 @@ include_once 'backend/nav.php';
         </div>
     </div>
 </div>
+
+<div class="modal hidden flex fixed w-screen h-screen z-50 bg-black bg-opacity-75 top-0 right-0 justify-center items-center">
+    <div class="py-3 px-2 bg-whitwe border mx-3 bg-white bg-opacity-25 rounded-lg shadow-lg w-96">
+        <form name="addform">
+            <input type="hidden" name="action" value="startElection">
+            <div class="relative">
+                <div class="relative sm:top bg-gray-100 cursor-pointer my-3 w-full flex flex-row  py-0 rounded-lg grid">
+                    <i class="mt-3 ml-3 fa-1x fa fa-spinner fa-pulse absolute text-gray-500"></i>
+                    <i class="right-3 px-2 rotate-45 fa-3x fa cursor-pointer h-full fa-angle-down selector absolute text-gray-500"></i>
+                    <div class="flex-grow pl-8 py-2 text-gray-500 selector">Select Election Duration</div>
+                </div>
+                <div class="relative -top-3 hidden">
+                    <div class="option-container w-full absolute border bg-white cursor-pointer text-gray-800 z-20">
+                        <div class="option hover:bg-blue-400 cursor-pointer hover:text-white">
+                            <input value="60" type="radio" class="radio appearance-none hidden" required id="me" name="duration">
+                            <label for="me" class="block px-4 cursor-pointer py-1 selector-list">1 Hour</label>
+                        </div>
+                        <div class="option hover:bg-blue-400 cursor-pointer hover:text-white">
+                            <input value="120" type="radio" class="radio appearance-none hidden" required id="2" name="duration">
+                            <label for="2" class="block px-4 cursor-pointer py-1 selector-list">2 Hour</label>
+                        </div>
+                        <div class="option hover:bg-blue-400 cursor-pointer hover:text-white">
+                            <input value="180" type="radio" class="radio appearance-none hidden" required id="3" name="duration">
+                            <label for="3" class="block px-4 cursor-pointer py-1 selector-list">3 Hour</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+                <button class="relative sm:top bg-green-400 text-white my-3 w-full flex flex-row  py-3 rounded-lg grid uppercase">
+                    Start Now
+                </button>
+                <span class="relative cursor-pointer cancel sm:top bg-red-400 text-center text-white my-3 w-full flex flex-row  py-3 rounded-lg grid uppercase">
+                    cancel
+                </span>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $('.cancel').click(()=>{
+        $('.modal').addClass('hidden');
+    })
+    $('#voteBtn , .ste').on('click',()=>{
+        $('.modal').removeClass('hidden');
+    })
+</script>
