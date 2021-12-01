@@ -44,13 +44,19 @@
         $position = $_POST['position'];
         $voter = $_POST['voter'];
         $contestant = $_POST['contestant'];
-        $voted = $conn->query("INSERT INTO votes (votefor,voter,position)VALUE('$contestant','$voter','$position')");
-        if($voted){
-            $users = $query->fetch_assoc();
-            echo json_encode([
-                'msg'=>'right',
-                'users' => $users['id']
-            ]);
+        $yr=date('Y');
+        $query = $conn->query("SELECT * FROM votes WHERE voter='$voter' AND position='$position' AND yr='$yr'");
+        if($query->num_rows < 0){
+            $voted = $conn->query("INSERT INTO votes (votefor,voter,position)VALUE('$contestant','$voter','$position')");
+            if($voted){
+                echo json_encode([
+                    'msg'=>'right',
+                ]);
+            }else{
+                echo json_encode([
+                    'msg'=>'wrong'
+                ]);
+            }
         }else{
             echo json_encode([
                 'msg'=>'wrong'
@@ -99,11 +105,22 @@
             ]);
         }
         
+    }elseif ($action == 'checkelectime') {
+        $yrN=date('Y');
+        $query = $conn->query("SELECT * FROM votep WHERE yr='$yrN'");
+        if($query->num_rows > 0){
+            echo json_encode([
+                'msg'=>'startNow'
+            ]);
+        }else{
+            echo json_encode([
+                'msg'=>'setime'
+            ]);
+        }
+
     }elseif ($action == 'startElection') {
-        // timeerh 	timeState 	yr 	timeerm 	timeers
         $duration = $_POST['duration'];
-        $hour= $duration/60;
-        $logged = $conn->query("INSERT INTO votep (timeerh,timeState)VALUE('$hour','1')");
+        $logged = $conn->query("INSERT INTO votep (timeerh)VALUE('$duration')");
         if($logged){
             echo json_encode([
                 'msg'=>'logged successfully'
@@ -113,7 +130,52 @@
                 'msg'=>'logging error'
             ]);
         }
-        
+    }elseif ($action == 'startN') {
+        $perform = $_POST['perform'];
+        $yr =date('Y');
+        $query = $conn->query("UPDATE votep SET timeState = '$perform' WHERE yr='$yr'");
+        if($logged){
+            echo json_encode([
+                'msg'=>'logged successfully'
+            ]);
+        }else{
+            echo json_encode([
+                'msg'=>'loggijkjkjkjkng erro error'
+            ]);
+        }
+    }elseif ($action == 'updateDepRes') {
+        $resNumber = $_POST['resNumber'];
+        $session = $_POST['session'];
+        $userID = $_POST['userID'];
+        $query = $conn->query("SELECT * FROM receiptlog WHERE receiptNumber='$resNumber'");
+        if($query1->num_rows < 1){
+            echo json_encode([
+                'msg'=>$resNumber,
+                'sta'=>'true'
+            ]);
+            // $query = $conn->query("SELECT * FROM receiptlog2 WHERE receiptnumber='$resNumber'");
+            // if($query->num_rows < 1){
+            //     $log = $conn->query("INSERT INTO receiptlog2 (userid,receiptnumber,yr)VALUE('$userID','$resNumber','$session')");
+            //     echo json_encode([
+            //         'msg'=>'logged successfully'
+            //     ]);
+            // }else{
+            //     $users = $query->fetch_assoc();
+            //     if ($users['userid'] == $userID) {
+            //         echo json_encode([
+            //             'msg'=>'This Recepit Has Already Been Logged By You'
+            //         ]);
+            //     } else {
+            //         echo json_encode([
+            //             'msg'=>'This Recepit Has Already Been Logged By Another User'
+            //         ]);
+            //     }
+            // }
+        }else {
+            echo json_encode([
+                'msg'=>$resNumber
+            ]);
+        }
     }else{
 
     }
@@ -125,11 +187,13 @@
             $users = $query->fetch_assoc();
             $_SESSION['active_user_id'] = $users['id'];
             echo json_encode([
+                'status'=>'good',
                 'msg'=>'login',
                 'users' => $users
             ]);
         }else{
             echo json_encode([
+                'status'=>'bad',
                 'msg'=>'Login Details are Incorrect'
             ]);
         }

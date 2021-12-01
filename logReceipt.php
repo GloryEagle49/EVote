@@ -10,7 +10,7 @@
                     <input type="hidden" name="action" value="logReceipt">
                     <div class="relative sm:top bg-white my-3 w-full flex flex-row  py-0 rounded-lg grid">
                         <i class="mt-3 ml-3 fa-1x fa fa-user absolute text-gray-500"></i>
-                        <input name="studentName" type="text" class="focus:outline-none placeholder-gray-500 px-8 rounded-lg w-full bg-gray-50 py-2" placeholder="Student's Fullname"> 
+                        <input name="studentName" type="text" class="focus:outline-none placeholder-gray-500 px-8 rounded-lg w-full bg-gray-50 py-2" placeholder="Student's Fullname (Surname Firstname)"> 
                     </div>
                     <div class="relative sm:top bg-white my-3 w-full flex flex-row  py-0 rounded-lg grid">
                         <i class="mt-3 ml-3 fa-1x fa fa-calander absolute text-gray-500"></i>

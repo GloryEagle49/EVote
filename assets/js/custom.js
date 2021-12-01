@@ -2,6 +2,7 @@ $(document).ready(function () {
 
     $('form[name=auth]').on('submit', function (ev){
         ev.preventDefault();
+        $formData = $(this)
         $data = $(this).serialize();
         $.ajax({
             type: 'post',
@@ -13,16 +14,26 @@ $(document).ready(function () {
                     window.location.href = 'index.php'
                 }else if(res.msg == 'logout'){
                     window.location.href = 'index.php'
-                    // Add a modal here too
                 }else{
-                    // TODO: Add a modal
+                    $('.msg').text(res.msg)
+                    $formData.trigger('reset')
                 }
             }
         })
     });
 
+    $('input[name=pwd]').on('keyup',function () {
+        if($(this).val().length > 0){
+            $(this).siblings('#eye').removeClass('hidden')
+        }else{
+            $(this).siblings('#eye').addClass('hidden')
+        }
+    });
+
+
     $('form[name=addform]').on('submit', function (ev){
         ev.preventDefault();
+        $formData = $(this)
         $data = $(this).serialize();
         // console.log($data);
         $.ajax({
@@ -32,18 +43,12 @@ $(document).ready(function () {
             dataType:'json',
             success: function(res){
                 console.log(res);
+                $formData.trigger('reset')
             }
         })
     });
 
 
-    $('input[name=pwd]').on('keyup',function () {
-        if($(this).val().length > 0){
-            $(this).siblings('#eye').removeClass('hidden')
-        }else{
-            $(this).siblings('#eye').addClass('hidden')
-        }
-    });
     $('input[name=regNum]').on('keyup',function () {
         $num = $(this).val();
         if($num != ''){
@@ -123,9 +128,12 @@ $(document).ready(function () {
                         url:'../voteBtn.php',
                         dataType:'html',
                         success:function(re){
-                            $('#voteBtn').html(re)
+                            var ret = localStorage.voteBnt
+                            if(re != ret){
+                                ret = re
+                                $('#voteBtn').html(ret)
+                            }
                         }
-                        
                     });
                     $.ajax({
                         type:'post',
@@ -143,12 +151,4 @@ $(document).ready(function () {
     }
 
 
-    // // $('#eye').cli('click',function () {
-    // //     console.log('hi');
-    //     $(this).addClass('hidden')
-    // //     $(this).siblings('#eye2').removeClass('hidden')
-    // // });
-    // // $('#eye').click(function () {
-    // //     console.log('hi');
-    // // });
 })

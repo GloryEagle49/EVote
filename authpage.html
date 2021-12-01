@@ -46,6 +46,7 @@
             <div class="w-full">
                 <!-- login section -->
                 <div name="signin" class="login w-full px-5 lg:px-12">
+                    <div class="text-red-300 msg"></div>
                     <div class="grid gap-2">
                         <form name="auth" class="p-0 w-full flex flex-col">
                             <input type="hidden" name="action" value="login">
@@ -55,7 +56,7 @@
                                 <input name="user" type="text" class="focus:outline-none placeholder-gray-500 px-8 rounded-lg w-full bg-gray-50 py-2" placeholder="Email or Phone or Reg Number"> 
                             </div>
                             <div class="relative bg-white shadow-2xl my-3 w-full flex flex-row  py-0 rounded-lg grid">
-                                <i id="eye" class="mt-3 cursor-pointer ml-3 fa-1x fa fa-eye absolute right-3 text-gray-500 hidden"></i>
+                                <i id="eye" class="mt-3 z-30 cursor-pointer ml-3 fa-1x fa fa-eye absolute right-3 text-gray-500 hidden"></i>
                                 <i id="eye2" class="mt-3 cursor-pointer ml-3 fa-1x fa fa-eye-slash absolute right-3 text-gray-500 hidden"></i>
                                 <i class="mt-3 ml-3 fa-1x fa fa-lock absolute text-gray-500"></i>
                                 <input name="pwd" type="password" class="focus:outline-none placeholder-gray-500 px-8 rounded-lg w-full bg-gray-50 py-2" placeholder="Password"> 
@@ -168,4 +169,9 @@
 <script src="assets/js/jquery.js"></script>
 <script src="assets/fa/js/all.js"></script>
 <script src="assets/js/custom.js"></script>
+<script>
+    $('#eye').on('click',function () {
+        console.log('hi');
+    });
+</script>
 </html>

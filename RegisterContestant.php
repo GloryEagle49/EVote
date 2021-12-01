@@ -64,6 +64,8 @@
                 </form>
             </div>
         </div>
-        <div class="bg--800">df</div>
+        <div class="bg--800">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Error adipisci blanditiis voluptate. Excepturi rem dignissimos vitae quibusdam dolorem corrupti, veniam odio tempore illum explicabo nostrum error, vero facilis at voluptates.
+        </div>
     </div>
 </div>

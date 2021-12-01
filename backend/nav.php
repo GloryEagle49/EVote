@@ -9,8 +9,13 @@
     $my_data= $query_my_data->fetch_array();
     $user_level = $my_data['usertype'];
     $query1 = $conn->query("SELECT * FROM votep ORDER BY sn DESC LIMIT 1");
-    $er=$query1->fetch_assoc();
-    $yr= $er['yr'];
+    if($query1->num_rows > 0){
+        $er=$query1->fetch_assoc();
+        $yr= $er['yr'];
+    }else{
+        $yr= date('Y');
+    }
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,6 +48,30 @@
             <?php
                 if($user_level == '2'){
                     ?>
+                        <div class="w-full">
+                            <a href="logReceipt.php" class="">
+                                <div class="py-4 px-3 w-full hover:bg-white text-gray-500 hover:text-blue-400 <?php if($title == 'Log Receipt'){ echo 'border-r-4 border-blue-400 bg-gray-200';}?>">
+                                    <i class="fa fa-vote-yea text-xs"></i> Log Departmental Receipt
+                                </div>
+                            </a>
+                        </div>
+                    <?php
+                }elseif ($user_level == '1') {
+                    ?>
+                        <div class="w-full">
+                            <a href="RegisterContestant.php" class="">
+                                <div class="py-4 px-3 w-full hover:bg-white text-gray-500 hover:text-blue-400 <?php if($title == 'Register Contestant'){ echo 'border-r-4 border-blue-400 bg-gray-200';}?>">
+                                    <i class="fa fa-user-plus text-xs"></i> Register Contestant
+                                </div>
+                            </a>
+                        </div>
+                        <div class="w-full">
+                            <a href="addPosition.php" class="">
+                                <div class="py-4 px-3 w-full hover:bg-white text-gray-500 hover:text-blue-400 <?php if($title == 'Add Position'){ echo 'border-r-4 border-blue-400 bg-gray-200';}?>">
+                                    <i class="fa fa-user-plus text-xs"></i> Add Position
+                                </div>
+                            </a>
+                        </div>
                         <div class="w-full">
                             <a href="logReceipt.php" class="">
                                 <div class="py-4 px-3 w-full hover:bg-white text-gray-500 hover:text-blue-400 <?php if($title == 'Log Receipt'){ echo 'border-r-4 border-blue-400 bg-gray-200';}?>">
@@ -112,12 +141,12 @@
                     <div class="flex flex-col items-end">
                         <div class="">
                             <span class="bg-blue-400 py-1 px-2 text-white rounded-full text-xs">
-                                level
+                                <?php echo $my_data['level'] ?>
                             </span>
                         </div>
-                        <div class="capitalize text-lg" style="font-family:'Bahnschrift'">firstname lastname</div>
+                        <div class="capitalize text-lg" style="font-family:'Bahnschrift'"><?php echo $my_data['firstname'].' '.$my_data['lastname'] ?></div>
                     </div>
-                    <img src="../assets/images/avatars/3.jpeg" class="w-12 h-12 rounded-full" srcset="">
+                    <img src="../assets/images/avatars/<?php echo $my_data['profileImg'] ?>" class="w-12 h-12 rounded-full" srcset="">
                 </div>
                 <div class="beller bg-white h-12 w-12 cursor-pointer relative flex justify-center items-center rounded-full">
                     <i class="fa fa-bell text-xs" style="font-size:23px"></i>
@@ -133,12 +162,12 @@
                     <div class="flex flex-col order-2">
                         <div class="">
                             <span class="bg-blue-400 py-1 px-2 text-white rounded-full" style="font-size:10px">
-                                level
+                            <?php echo $my_data['level'] ?>
                             </span>
                         </div>
-                        <div class="capitalize text-sm" style="font-family:'Bahnschrift'">firstname lastname</div>
+                        <div class="capitalize text-sm" style="font-family:'Bahnschrift'"><?php echo $my_data['firstname'].' '.$my_data['lastname'] ?></div>
                     </div>
-                    <img src="../assets/images/avatars/3.jpeg" class="w-8 h-8 rounded-full" srcset="">
+                    <img src="../assets/images/avatars/<?php echo $my_data['profileImg'] ?>" class="w-8 h-8 rounded-full" srcset="">
                 </div>
                 <div class="beller bg-white h-8 w-8 cursor-pointer relative flex justify-center items-center rounded-full">
                     <i class="fa fa-bell text-xs" style="font-size:13px"></i>

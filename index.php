@@ -139,23 +139,35 @@ include_once 'backend/nav.php';
                 <div class="relative -top-3 hidden">
                     <div class="option-container w-full absolute border bg-white cursor-pointer text-gray-800 z-20">
                         <div class="option hover:bg-blue-400 cursor-pointer hover:text-white">
-                            <input value="60" type="radio" class="radio appearance-none hidden" required id="me" name="duration">
-                            <label for="me" class="block px-4 cursor-pointer py-1 selector-list">1 Hour</label>
+                            <input value="60" type="radio" class="radio appearance-none hidden" required id="2" name="duration">
+                            <label for="2" class="block px-4 cursor-pointer py-1 selector-list">1 Hour</label>
                         </div>
                         <div class="option hover:bg-blue-400 cursor-pointer hover:text-white">
-                            <input value="120" type="radio" class="radio appearance-none hidden" required id="2" name="duration">
-                            <label for="2" class="block px-4 cursor-pointer py-1 selector-list">2 Hour</label>
+                            <input value="90" type="radio" class="radio appearance-none hidden" required id="3" name="duration">
+                            <label for="3" class="block px-4 cursor-pointer py-1 selector-list">1 Hour 30 minutes</label>
+                        </div>
+                        <div class="option hover:bg-blue-400 cursor-pointer hover:text-white">
+                            <input value="120" type="radio" class="radio appearance-none hidden" required id="me" name="duration">
+                            <label for="me" class="block px-4 cursor-pointer py-1 selector-list">2 Hours</label>
+                        </div>
+                        <div class="option hover:bg-blue-400 cursor-pointer hover:text-white">
+                            <input value="150" type="radio" class="radio appearance-none hidden" required id="2" name="duration">
+                            <label for="2" class="block px-4 cursor-pointer py-1 selector-list">2 Hours 30 minutes</label>
                         </div>
                         <div class="option hover:bg-blue-400 cursor-pointer hover:text-white">
                             <input value="180" type="radio" class="radio appearance-none hidden" required id="3" name="duration">
-                            <label for="3" class="block px-4 cursor-pointer py-1 selector-list">3 Hour</label>
+                            <label for="3" class="block px-4 cursor-pointer py-1 selector-list">3 Hours</label>
+                        </div>
+                        <div class="option hover:bg-blue-400 cursor-pointer hover:text-white">
+                            <input value="210" type="radio" class="radio appearance-none hidden" required id="me" name="duration">
+                            <label for="me" class="block px-4 cursor-pointer py-1 selector-list">3 hours 30 minutes</label>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="grid grid-cols-2 gap-2">
                 <button class="relative sm:top bg-green-400 text-white my-3 w-full flex flex-row  py-3 rounded-lg grid uppercase">
-                    Start Now
+                    Set time
                 </button>
                 <span class="relative cursor-pointer cancel sm:top bg-red-400 text-center text-white my-3 w-full flex flex-row  py-3 rounded-lg grid uppercase">
                     cancel
@@ -169,7 +181,53 @@ include_once 'backend/nav.php';
     $('.cancel').click(()=>{
         $('.modal').addClass('hidden');
     })
-    $('#voteBtn , .ste').on('click',()=>{
-        $('.modal').removeClass('hidden');
+    $('#voteBtn').on('click','.ste',()=>{
+        $data = {'action':'checkelectime'}
+        $.ajax({
+            type: 'post',
+            url:'backend/qureies.php',
+            data: $data,
+            dataType:'json',
+            success: function(res){
+                if(res.msg == "setime"){
+                    $('.modal').removeClass('hidden');
+                }else{
+                    $data = {'action':'startN', 'perform':'1'}
+                    $.ajax({
+                        type: 'post',
+                        url:'backend/qureies.php',
+                        data: $data,
+                        dataType:'json',
+                        success: function(res2){
+                            
+                        }
+                    })
+                }
+            }
+        })
+    })
+    $('#voteBtn').on('click','.pau',()=>{
+        $data = {'action':'startN', 'perform':'2'}
+        $.ajax({
+            type: 'post',
+            url:'backend/qureies.php',
+            data: $data,
+            dataType:'json',
+            success: function(res2){
+                
+            }
+        })
+    })
+    $('#voteBtn').on('click','.stp',()=>{
+        $data = {'action':'startN', 'perform':'3'}
+        $.ajax({
+            type: 'post',
+            url:'backend/qureies.php',
+            data: $data,
+            dataType:'json',
+            success: function(res2){
+                
+            }
+        })
     })
 </script>
