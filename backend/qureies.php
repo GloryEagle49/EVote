@@ -46,20 +46,16 @@
         $contestant = $_POST['contestant'];
         $yr=date('Y');
         $query = $conn->query("SELECT * FROM votes WHERE voter='$voter' AND position='$position' AND yr='$yr'");
-        if($query->num_rows < 0){
+        if($query->num_rows < 1){
             $voted = $conn->query("INSERT INTO votes (votefor,voter,position)VALUE('$contestant','$voter','$position')");
             if($voted){
                 echo json_encode([
-                    'msg'=>'right',
-                ]);
-            }else{
-                echo json_encode([
-                    'msg'=>'wrong'
+                    'msg'=>'Vote Casted Successfully',
                 ]);
             }
         }else{
             echo json_encode([
-                'msg'=>'wrong'
+                'msg'=>'You Have Already Voted A Candidate For This Position'
             ]);
         }
     }elseif ($action == 'checkreg') {
@@ -147,33 +143,42 @@
         $resNumber = $_POST['resNumber'];
         $session = $_POST['session'];
         $userID = $_POST['userID'];
-        $query = $conn->query("SELECT * FROM receiptlog WHERE receiptNumber='$resNumber'");
-        if($query1->num_rows < 1){
-            echo json_encode([
-                'msg'=>$resNumber,
-                'sta'=>'true'
-            ]);
-            // $query = $conn->query("SELECT * FROM receiptlog2 WHERE receiptnumber='$resNumber'");
-            // if($query->num_rows < 1){
-            //     $log = $conn->query("INSERT INTO receiptlog2 (userid,receiptnumber,yr)VALUE('$userID','$resNumber','$session')");
-            //     echo json_encode([
-            //         'msg'=>'logged successfully'
-            //     ]);
-            // }else{
-            //     $users = $query->fetch_assoc();
-            //     if ($users['userid'] == $userID) {
-            //         echo json_encode([
-            //             'msg'=>'This Recepit Has Already Been Logged By You'
-            //         ]);
-            //     } else {
-            //         echo json_encode([
-            //             'msg'=>'This Recepit Has Already Been Logged By Another User'
-            //         ]);
-            //     }
-            // }
+        $query1 = $conn->query("SELECT * FROM receiptlog WHERE receiptNumber='$resNumber'");
+        if($query1->num_rows == 1){
+            $query = $conn->query("SELECT * FROM receiptlog2 WHERE receiptnumber='$resNumber'");
+            if($query->num_rows < 1){
+                $QuestId= $_SESSION['active_user_id'] ;
+                $query2 = $conn->query("SELECT * FROM users WHERE id='$QuestId'");
+                $user= $query1->fetch_assoc();
+                $users = $query2->fetch_assoc();
+                $nameTwo = $users['firstname'].' '.$users['lastname'];
+                $nameOne = $users['lastname'].' '.$users['firstname'];
+                $mainName = $user['fullname'];
+                if(($mainName == $nameOne) || ($mainName == $nameTwo)){
+                    $log = $conn->query("INSERT INTO receiptlog2 (userid,receiptnumber,sessio)VALUE('$userID','$resNumber','$session')");
+                    echo json_encode([
+                        'msg'=>'logged successfully',
+                    ]);
+                }else{
+                    echo json_encode([
+                        'msg'=>'This recepit was not bought with your name',
+                    ]);
+                }
+            }else{
+                $users = $query->fetch_assoc();
+                if ($users['userid'] == $userID) {
+                    echo json_encode([
+                        'msg'=>'This Recepit Has Already Been Logged By You'
+                    ]);
+                } else {
+                    echo json_encode([
+                        'msg'=>'This Recepit Has Already Been Logged By Another User'
+                    ]);
+                }
+            }
         }else {
             echo json_encode([
-                'msg'=>$resNumber
+                'msg'=>$resNumber.' Is an Invalid departmental recepit number'
             ]);
         }
     }else{
