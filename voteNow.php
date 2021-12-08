@@ -8,11 +8,16 @@ $position = $_GET['position'];
         <div class="lg:col-span-2 py-3 flex justify-center items-center" style="min-height:80vh">
             <div class="py-3 bg-whitwe border rounded-lg shadow-lg w-96 lg:w-1/2">
                 <form name="addform">
-                    <div class="text-xl px-2 uppercase"><?php 
-                        $positionn = $conn->query("SELECT * FROM posirtion WHERE sn ='$position'");
-                        $positionName=$positionn->fetch_array();
-                        echo $positionName['spotname'];
-                    ?></div>
+                    <div class="flex uppercase">
+                        <div class="text-xl px-2 flex-grow">
+                            <?php 
+                                $positionn = $conn->query("SELECT * FROM posirtion WHERE sn='$position'");
+                                $positionName=$positionn->fetch_array();
+                                echo $positionName['spotname'];
+                            ?>
+                        </div>
+                        <div class="pr-2">number of Votes</div>
+                    </div>
                     <input type="hidden" name="action" value="castVote">
                     <input type="hidden" name="position" value="<?php echo $position ?>">
                     <input type="hidden" name="voter" value="<?php echo $user_id?>">
@@ -28,10 +33,16 @@ $position = $_GET['position'];
                                 <div class="option hover:bg-blue-400 cursor-pointer hover:text-white gap-2 px-2 flex items-center">
                                     <input value="<?php echo $contId?>" required type="radio" class="radio" id="<?php echo $contId?>" name="contestant">
                                     <label for="<?php echo $contId?>" class="block flex-grow cursor-pointer py-1">
-                                    <div class="flex py-2 gap-2 items-center">
-                                        <img src="../assets/images/avatars/3.jpeg" class="w-10 h-10 shadow-lg rounded-full" srcset="">
-                                        <div class="capitalize flex-grow"><?php echo $pesd['lastname'].' '.$pesd['firstname'] ?></div>
-                                    </div>
+                                        <div class="flex py-2 gap-2 items-center">
+                                            <img src="../assets/images/avatars/3.jpeg" class="w-10 h-10 shadow-lg rounded-full" srcset="">
+                                            <div class="capitalize flex-grow"><?php echo $pesd['lastname'].' '.$pesd['firstname'] ?></div>
+                                            <div class="">
+                                                <?php
+                                                    $getVote = $conn->query("SELECT * FROM votes WHERE votefor='$contId' AND position='$position_id' AND yr='$yrN'");
+                                                    echo $getVote->num_rows;
+                                                ?>
+                                            </div>
+                                        </div>
                                     </label>
                                 </div>
                             <?php

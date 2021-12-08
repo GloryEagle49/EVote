@@ -18,6 +18,13 @@ include_once 'backend/nav.php';
                 <div class="text-5xl py-3">20</div>
             </div>
         </div>
+        <marquee behavior="" direction="" style="padding:10px;margin-top:20px" class="">
+            <div class="p-3 inline-block m-3 rounded-lg h-96 shadow-lg w-64 bg-green-200"></div>
+            <div class="p-3 inline-block m-3 rounded-lg h-96 shadow-lg w-64 bg-green-200"></div>
+            <div class="p-3 inline-block m-3 rounded-lg h-96 shadow-lg w-64 bg-green-200"></div>
+            <div class="p-3 inline-block m-3 rounded-lg h-96 shadow-lg w-64 bg-green-200"></div>
+            <div class="p-3 inline-block m-3 rounded-lg h-96 shadow-lg w-64 bg-green-200"></div>
+        </marquee>
     </div>
     <div class="sm:col-span-1 sm:order-2 md:col-span-2 md:order-0 lg:order-4 lg:col-span-1 xl:col-span-2">
          <div class="pb-8">
@@ -33,7 +40,7 @@ include_once 'backend/nav.php';
                 <div class="flex relative">
                     <?php
                         $eligible = $conn->query("SELECT * FROM receiptlog2 WHERE userid='$user_id' AND yr='$yr'");
-                        if($eligible->num_rows > 1){
+                        if($eligible->num_rows > 0){
                             ?>
                                 <div class="flex-grow text-green-400">eligible</div>
                             <?php

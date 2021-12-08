@@ -31,7 +31,10 @@
             while ($position = $positions->fetch_array()) {
                 ?>
                     <div class="py-5 flex flex-col px-2 bg-white rounded-lg shadow-lg">
-                        <div class="text-xl"><?php echo $position['spotname'] ?></div>
+                        <div class="flex text-xl uppercase">
+                            <div class="flex-grow"><?php echo $position['spotname'] ?></div>
+                            <div class="pr-2">number of Votes</div>
+                        </div>
                         <div class="flex-grow">
                             <?php
                                 $position_id= $position['sn'];
@@ -48,7 +51,12 @@
                                                 <img src="../assets/images/avatars/3.jpeg" class="w-10 h-10 shadow-lg rounded-full" srcset="">
                                                 <div class="capitalize flex-grow"> <?php echo $fullName; ?></div>
                                                 <div class="flex gap-2 ">
-                                                    <div class="">69%</div>
+                                                    <div class="">
+                                                    <?php
+                                                        $getVote = $conn->query("SELECT * FROM votes WHERE votefor='$candidate' AND position='$position_id' AND yr='$yrN'");
+                                                            echo $getVote->num_rows;
+                                                        ?>
+                                                    </div>
                                                 </div>
                                             </div>
                                         <?php

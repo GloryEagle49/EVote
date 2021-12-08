@@ -23,7 +23,7 @@
                 </div>
                 <div class="">
                     <?php
-                        if($eligible->num_rows > 1){
+                        if($eligible->num_rows > 0){
                             ?>
                                 <a href="results.php" class="bg-blue-700 text-gray-100 px-3 py-2 rounded-lg">
                                     vote now
@@ -44,7 +44,7 @@
         ?>
             <div class="">
                 <?php
-                    if($eligible->num_rows > 1){
+                    if($eligible->num_rows > 0){
                         ?>
                             <a href="results.php" class="bg-blue-700 text-gray-100 px-3 py-2 rounded-lg">
                                 vote now
