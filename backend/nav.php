@@ -33,7 +33,7 @@
     <div class="sidenav -ml-72 transition-all duration-500 md:ml-0 w-72 z-20 flex flex-col fixed bg-gray-100 h-full overflow-y-auto shadow-md py-5">
         <div class="flex py-9 justify-center">
             <div class="flex items-center gap-2">
-                <div class="h-12 w-12 mx-auto rounded-full bg-white"></div>
+            <img src="assets/images/NACOS.png" alt="" class="h-14">
                 <div class="text-2xl font-bold text-blue-800 ">E-Voting</div>
             </div>
         </div>
