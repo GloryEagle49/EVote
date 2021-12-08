@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2021 at 08:51 PM
+-- Generation Time: Dec 08, 2021 at 11:41 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.4.22
 
@@ -38,6 +38,16 @@ CREATE TABLE `contestants` (
   `yr` year(4) NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `contestants`
+--
+
+INSERT INTO `contestants` (`sn`, `userid`, `position`, `level`, `time`, `yr`) VALUES
+(1, '14', '1', 'HND 1', '2021-12-03 11:21:28', 2021),
+(2, '2', '2', 'ND 1', '2021-12-03 11:22:23', 2021),
+(3, '4', '5', 'HND 1', '2021-12-03 11:22:55', 2021),
+(4, '7', '1', 'HND 1', '2021-12-03 11:52:23', 2021);
+
 -- --------------------------------------------------------
 
 --
@@ -49,6 +59,18 @@ CREATE TABLE `posirtion` (
   `spotname` varchar(111) NOT NULL,
   `time` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `posirtion`
+--
+
+INSERT INTO `posirtion` (`sn`, `spotname`, `time`) VALUES
+(1, 'president', '2021-12-03 11:21:01'),
+(2, 'dfkl ', '2021-12-03 11:21:10'),
+(3, 'dfkjdf', '2021-12-03 11:21:11'),
+(4, 'dfkljlrtklkfdv', '2021-12-03 11:21:12'),
+(5, 'jcvmlktys', '2021-12-03 11:21:14'),
+(6, 'fgerlktmcvort', '2021-12-03 11:21:16');
 
 -- --------------------------------------------------------
 
@@ -64,6 +86,13 @@ CREATE TABLE `receiptlog` (
   `times` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `receiptlog`
+--
+
+INSERT INTO `receiptlog` (`sn`, `fullname`, `receiptdate`, `receiptNumber`, `times`) VALUES
+(1, 'ebube roderick', 2021, 1000, '2021-11-15 15:07:37');
+
 -- --------------------------------------------------------
 
 --
@@ -74,8 +103,16 @@ CREATE TABLE `receiptlog2` (
   `sn` int(225) NOT NULL,
   `userid` int(225) NOT NULL,
   `receiptnumber` varchar(111) NOT NULL,
+  `sessio` varchar(12) NOT NULL,
   `yr` year(4) NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `receiptlog2`
+--
+
+INSERT INTO `receiptlog2` (`sn`, `userid`, `receiptnumber`, `sessio`, `yr`) VALUES
+(10, 1, '1000', '2020 / 2021', 2021);
 
 -- --------------------------------------------------------
 
@@ -98,6 +135,26 @@ CREATE TABLE `users` (
   `time` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `firstname`, `lastname`, `reg`, `dept`, `level`, `profileImg`, `usertype`, `email`, `phone`, `pwd`, `time`) VALUES
+(1, 'ebube', 'roderick', '19e/0231/cs', 'computer science', 'HND 1', '3.jpeg', 1, 'ebuberoderick2@gmail.com', '08130075358', '25d55ad283aa400af464c76d713c07ad', '2021-11-15 14:58:00'),
+(2, 'glory', 'ugonna', '18e/0230/cs', 'computer science', 'ND 2', '3.jpeg', 0, 'onye@gmail', '', '25d55ad283aa400af464c76d713c07ad', '2021-11-15 15:16:02'),
+(3, 'favor', 'chimaka', '19e/0222/cs', 'computer science', 'HND 1', '3.jpeg', 3, 'favour@gmail.com', '09032708150', '25d55ad283aa400af464c76d713c07ad', '2021-11-15 15:17:53'),
+(4, 'emma', 'peter', '19e/0023/cs', 'computer science', 'HND 1', '3.jpeg', 4, 'emma@gmail.com', '070657678976', '25d55ad283aa400af464c76d713c07ad', '2021-11-15 15:19:22'),
+(5, 'noble', 'emma', '18e/0001/cs', 'computer science', 'HND 2', '3.jpeg', 2, 'noble@gmail.com', '909032708150', '25d55ad283aa400af464c76d713c07ad', '2021-11-15 15:21:09'),
+(6, 'ugochi', 'favour', '19e/0412/cs', 'computer science', 'HND 1', '3.jpeg', 0, 'ugo@gmail.com', '08107124093', '25d55ad283aa400af464c76d713c07ad', '2021-11-15 15:23:42'),
+(7, 'chioma', 'emma', '19e/0032/cs', 'computer science', 'HND 1', '3.jpeg', 3, 'chioma@gmail.com', '', '25d55ad283aa400af464c76d713c07ad', '2021-11-15 15:24:58'),
+(8, 'justine', 'ebube', '19e/0453/cs', 'computer science', 'ND 1', '3.jpeg', 0, 'justine@gmail.com', '', '25d55ad283aa400af464c76d713c07ad', '2021-11-15 15:26:32'),
+(9, 'goodness', 'ngozie', '19e/0035/cs', 'computer science', 'HND 1', '3.jpeg', 0, 'good@gmail.com', '', '25d55ad283aa400af464c76d713c07ad', '2021-11-15 15:27:40'),
+(10, 'justice', 'N', '19e/0452/cs', 'computer science', 'HND 1', '3.jpeg', 0, 'justice@gmail.com', '', '25d55ad283aa400af464c76d713c07ad', '2021-11-15 15:29:01'),
+(11, 'victor', 'chima', '19e/0341/cs', 'computer science', 'HND 1', '3.jpeg', 0, 'victor@gmail.com', '', '25d55ad283aa400af464c76d713c07ad', '2021-11-15 15:33:54'),
+(12, 'wendy', 'chi', '19e/0378/cs', 'computer science', 'HND 1', '3.jpeg', 0, 'chi@gmail.com', '', '25d55ad283aa400af464c76d713c07ad', '2021-11-15 15:34:54'),
+(13, 'glory', 'mercy', '18e/0064/cs', 'computer science', 'ND 2', '3.jpeg', 0, 'glory@gmail.com', '', '5060394018b0f50f18d608935d9655b1', '2021-11-15 15:36:46'),
+(14, 'ugonna', 'emma', '19e/0001/cs', 'computer science', 'HND 1', '3.jpeg', 0, 'emma@gmail.com', '', 'ca98e060a1a6220b11abe44ead94e7fb', '2021-11-15 15:37:58');
+
 -- --------------------------------------------------------
 
 --
@@ -118,7 +175,7 @@ CREATE TABLE `votep` (
 --
 
 INSERT INTO `votep` (`sn`, `timeerh`, `timeerm`, `timeers`, `timeState`, `yr`) VALUES
-(1, 3, 0, 0, 4, 2021);
+(1, 120, 0, 0, 1, 2021);
 
 -- --------------------------------------------------------
 
@@ -134,6 +191,14 @@ CREATE TABLE `votes` (
   `yr` year(4) NOT NULL DEFAULT current_timestamp(),
   `time` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `votes`
+--
+
+INSERT INTO `votes` (`sn`, `votefor`, `voter`, `position`, `yr`, `time`) VALUES
+(1, 2, 1, 2, 2021, '2021-12-03 12:05:27'),
+(2, 7, 1, 1, 2021, '2021-12-03 12:09:38');
 
 --
 -- Indexes for dumped tables
@@ -189,43 +254,43 @@ ALTER TABLE `votes`
 -- AUTO_INCREMENT for table `contestants`
 --
 ALTER TABLE `contestants`
-  MODIFY `sn` int(225) NOT NULL AUTO_INCREMENT;
+  MODIFY `sn` int(225) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `posirtion`
 --
 ALTER TABLE `posirtion`
-  MODIFY `sn` int(225) NOT NULL AUTO_INCREMENT;
+  MODIFY `sn` int(225) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `receiptlog`
 --
 ALTER TABLE `receiptlog`
-  MODIFY `sn` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `sn` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `receiptlog2`
 --
 ALTER TABLE `receiptlog2`
-  MODIFY `sn` int(225) NOT NULL AUTO_INCREMENT;
+  MODIFY `sn` int(225) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `votep`
 --
 ALTER TABLE `votep`
-  MODIFY `sn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `sn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `votes`
 --
 ALTER TABLE `votes`
-  MODIFY `sn` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `sn` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
