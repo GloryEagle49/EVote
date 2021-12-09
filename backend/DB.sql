@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 08, 2021 at 11:41 AM
+-- Generation Time: Dec 09, 2021 at 11:02 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.4.22
 
@@ -43,10 +43,9 @@ CREATE TABLE `contestants` (
 --
 
 INSERT INTO `contestants` (`sn`, `userid`, `position`, `level`, `time`, `yr`) VALUES
-(1, '14', '1', 'HND 1', '2021-12-03 11:21:28', 2021),
-(2, '2', '2', 'ND 1', '2021-12-03 11:22:23', 2021),
-(3, '4', '5', 'HND 1', '2021-12-03 11:22:55', 2021),
-(4, '7', '1', 'HND 1', '2021-12-03 11:52:23', 2021);
+(1, '9', '1', 'HND 1', '2021-12-09 06:44:47', 2021),
+(2, '1', '1', 'HND 1', '2021-12-09 06:45:31', 2021),
+(3, '2', '1', 'HND 1', '2021-12-09 06:45:43', 2021);
 
 -- --------------------------------------------------------
 
@@ -158,6 +157,29 @@ INSERT INTO `users` (`id`, `firstname`, `lastname`, `reg`, `dept`, `level`, `pro
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `voteorder`
+--
+
+CREATE TABLE `voteorder` (
+  `sn` int(12) NOT NULL,
+  `userId` int(222) NOT NULL,
+  `position` int(221) NOT NULL,
+  `yr` year(4) NOT NULL DEFAULT current_timestamp(),
+  `votes` int(221) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `voteorder`
+--
+
+INSERT INTO `voteorder` (`sn`, `userId`, `position`, `yr`, `votes`) VALUES
+(1, 9, 1, 2021, 1),
+(2, 1, 1, 2021, 1),
+(3, 2, 1, 2021, 2);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `votep`
 --
 
@@ -197,8 +219,10 @@ CREATE TABLE `votes` (
 --
 
 INSERT INTO `votes` (`sn`, `votefor`, `voter`, `position`, `yr`, `time`) VALUES
-(1, 2, 1, 2, 2021, '2021-12-03 12:05:27'),
-(2, 7, 1, 1, 2021, '2021-12-03 12:09:38');
+(1, 9, 0, 1, 2021, '2021-12-09 06:44:47'),
+(2, 1, 0, 1, 2021, '2021-12-09 06:45:31'),
+(3, 2, 0, 1, 2021, '2021-12-09 06:45:43'),
+(4, 2, 1, 1, 2021, '2021-12-09 06:46:31');
 
 --
 -- Indexes for dumped tables
@@ -235,6 +259,12 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `voteorder`
+--
+ALTER TABLE `voteorder`
+  ADD PRIMARY KEY (`sn`);
+
+--
 -- Indexes for table `votep`
 --
 ALTER TABLE `votep`
@@ -254,7 +284,7 @@ ALTER TABLE `votes`
 -- AUTO_INCREMENT for table `contestants`
 --
 ALTER TABLE `contestants`
-  MODIFY `sn` int(225) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `sn` int(225) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `posirtion`
@@ -281,6 +311,12 @@ ALTER TABLE `users`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
+-- AUTO_INCREMENT for table `voteorder`
+--
+ALTER TABLE `voteorder`
+  MODIFY `sn` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `votep`
 --
 ALTER TABLE `votep`
@@ -290,7 +326,7 @@ ALTER TABLE `votep`
 -- AUTO_INCREMENT for table `votes`
 --
 ALTER TABLE `votes`
-  MODIFY `sn` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `sn` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
