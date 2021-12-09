@@ -127,6 +127,14 @@
                 'msg'=>'logging error'
             ]);
         }
+    }elseif ($action == 'delPosition') {
+        $id = $_POST['id'];
+        $query = $conn->query("DELETE FROM posirtion WHERE sn='$id'");
+        if($query){
+            echo json_encode([
+                'msg'=>'deleted'
+            ]);
+        }
     }elseif ($action == 'startN') {
         $perform = $_POST['perform'];
         $yr =date('Y');

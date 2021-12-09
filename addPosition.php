@@ -18,6 +18,25 @@
                 </form>
             </div>
         </div>
-        <div class="bg--800">df</div>
+        <div class="space-y-3">
+            <div class="">Positions</div>
+            <div class="p-4 pl-0 space-y-3" style="height:70vh;overflow-y:auto">
+                <?php
+                    $positions = $conn->query("SELECT * FROM posirtion");
+                    while ($position = $positions->fetch_array()) {
+                        ?>
+                            <div class="p-3 flex w-full bg-white shadow-lg rounded-lg items-centr">
+                                <div class="flex-grow">
+                                    <?php  echo $position['spotname']  ?>
+                                </div>
+                                <div class="px-4">
+                                    <i class="fa fa-trash delPosition text-red-500 cursor-pointer" id="<?php echo $position['sn']?>" title="Delete"></i>
+                                </div>
+                            </div>
+                        <?php
+                    }
+                ?>
+            </div>
+        </div>
     </div>
 </div>

@@ -114,22 +114,6 @@ include_once 'backend/nav.php';
                         }
                     }
                 ?>
-                <?php
-                    // $a = 0 ;
-                    // while ($a <= 5) {
-                    //     echo '
-                    //         <div class="bg-white py-2 px-1 shadow-lg rounded-lg divide-x flex items-center my-1">
-                    //             <div class="px-2">SN</div>
-                    //             <div class="px-2 flex-grow flex items-center gap-2">
-                    //                 <img src="../assets/images/avatars/3.jpeg" class="w-10 h-10 shadow-lg rounded-full" srcset="">
-                    //                 <div class="capitalize flex-grow">firstname lastname</div>
-                    //             </div>
-                    //             <div class="px-8">Position</div>
-                    //         </div>
-                    //     ';
-                    //     $a++;
-                    // }
-                ?>
             </div>
         </div>
     </div>

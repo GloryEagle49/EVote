@@ -54,7 +54,7 @@
                                                     <div class="">
                                                     <?php
                                                         $getVote = $conn->query("SELECT * FROM votes WHERE votefor='$candidate' AND position='$position_id' AND yr='$yrN'");
-                                                            echo $getVote->num_rows - 1;
+                                                        echo $getVote->num_rows - 1 ;
                                                         ?>
                                                     </div>
                                                 </div>

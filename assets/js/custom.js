@@ -107,7 +107,7 @@ $(document).ready(function () {
     $url = new URL(window.location);
     $pathArray = $url.pathname.split('/');
     $current_page = $pathArray.pop();
-    if($current_page == 'index.php'){
+    if($current_page == 'index.php' || 'ElectionMode.php'){
         setInterval(() => {
             $.ajax({
                 url:'../electionprogress.php',
@@ -150,5 +150,19 @@ $(document).ready(function () {
         }, 1000);
     }
 
+    $('.delPosition').on('click',function () {
+        $data = {id : $(this).attr('id'), action:'delPosition'}
+        $.ajax({
+            type:'POST',
+            url:'backend/qureies.php',
+            data:$data,
+            dataType: 'json',
+            success:function (res) {
+                if (res.msg == 'deleted') {
+                    window.location.reload()
+                }
+            }
+        })
+    })
 
 })
