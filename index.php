@@ -22,11 +22,23 @@ include_once 'backend/nav.php';
             Top Rankings
         </div>
         <marquee behavior="" direction="" style="" class="">
-            <div class="p-3 inline-block mx-3 mb-3 rounded-lg h-96 shadow-lg w-64 bg-green-200"></div>
-            <div class="p-3 inline-block mx-3 mb-3 rounded-lg h-96 shadow-lg w-64 bg-green-200"></div>
-            <div class="p-3 inline-block mx-3 mb-3 rounded-lg h-96 shadow-lg w-64 bg-green-200"></div>
-            <div class="p-3 inline-block mx-3 mb-3 rounded-lg h-96 shadow-lg w-64 bg-green-200"></div>
-            <div class="p-3 inline-block mx-3 mb-3 rounded-lg h-96 shadow-lg w-64 bg-green-200"></div>
+
+            <div class="p-3 inline-block mx-3 mb-3 rounded-lg h-96 shadow-lg w-64 bg-green-200">
+                <div class="py-5 mb-3">
+                    <img src="assets/images/avatars/2.jpeg" class="rounded-full w-32 h-32 mx-auto shadow-lg mt-5" alt="">
+
+                    <div class="text-center mb-6">
+                        <small class="text-center text-md font-semibold text-gray-800 capitalize block mt-3">Favour Nwachukwu</small>
+                        <small class="text-center text-md font-semibold text-gray-800 capitalize block">secretary</small>
+                    </div>
+
+                    <div class="text-center">
+                        <small class="capitalize text-6xl font-semibold text-gray-800">44<span class="text-xs">votes</span></small>
+                    </div>
+                </div>
+
+                
+            </div>
         </marquee>
     </div>
     <div class="sm:col-span-1 sm:order-2 md:col-span-2 md:order-0 lg:order-4 lg:col-span-1 xl:col-span-2">
