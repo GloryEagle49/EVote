@@ -106,6 +106,13 @@
                                 </div>
                             </a>
                         </div>
+                        <div class="w-full">
+                            <a href="ElectionMode.php" class="">
+                                <div class="py-4 px-3 w-full hover:bg-white text-gray-500 hover:text-blue-400 <?php if($title == 'Election Mode'){ echo 'border-r-4 border-blue-400 bg-gray-200';}?>">
+                                    <i class="fa fa-user-plus text-xs"></i> Election Mode
+                                </div>
+                            </a>
+                        </div>
                     <?php
                 }
             ?>
@@ -137,7 +144,7 @@
         </div>
         <div class="fixed w-screen lg:pr-9 md:pr-4 pr-2 py-4 top-0 right-0 lg:flex hidden justify-end">
             <div class="flex gap-3">
-                <div class="flex items-center gap-3">
+                <div class="flex items-center gap-3 profileData">
                     <div class="flex flex-col items-end">
                         <div class="">
                             <span class="bg-blue-400 py-1 px-2 text-white rounded-full text-xs">
@@ -156,7 +163,7 @@
         </div>
     </div>
     <div class="sticky top-0 bg-white z-10 md:ml-72 pl-2 lg:pl-5 relative">
-        <div class="lg:hidden">
+        <div class="lg:hidden profileData">
             <div class="flex gap-3 items-center">
                 <div class="flex items-center gap-3 order-2">
                     <div class="flex flex-col order-2">

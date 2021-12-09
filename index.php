@@ -22,23 +22,35 @@ include_once 'backend/nav.php';
             Top Rankings
         </div>
         <marquee behavior="" direction="" style="" class="">
-
-            <div class="p-3 inline-block mx-3 mb-3 rounded-lg h-96 shadow-lg w-64 bg-green-200">
-                <div class="py-5 mb-3">
-                    <img src="assets/images/avatars/2.jpeg" class="rounded-full w-32 h-32 mx-auto shadow-lg mt-5" alt="">
-
-                    <div class="text-center mb-6">
-                        <small class="text-center text-md font-semibold text-gray-800 capitalize block mt-3">Favour Nwachukwu</small>
-                        <small class="text-center text-md font-semibold text-gray-800 capitalize block">secretary</small>
-                    </div>
-
-                    <div class="text-center">
-                        <small class="capitalize text-6xl font-semibold text-gray-800">44<span class="text-xs">votes</span></small>
-                    </div>
-                </div>
-
-                
-            </div>
+            <?php
+                $positions = $conn->query("SELECT * FROM posirtion");
+                while ($position = $positions->fetch_array()) {
+                    $position_id= $position['sn'];
+                    $yrN=date('Y');
+                    $contestants = $conn->query("SELECT * FROM voteorder WHERE position='$position_id' AND yr='$yrN'  ORDER BY votes DESC LIMIT 1");
+                    if ($contestants->num_rows > 0) {
+                        $contestant = $contestants->fetch_array();
+                        $candidate = $contestant['userId'];
+                        $candidateD = $conn->query("SELECT * FROM users WHERE id ='$candidate'");
+                        $candidateData = $candidateD->fetch_array();
+                        $fullName = $candidateData['firstname'] . ' ' . $candidateData['lastname'];
+                        ?>
+                            <div class="p-3 inline-block mx-3 mb-3 rounded-lg h-96 shadow-lg w-64 bg-green-200">
+                                <div class="py-5 mb-3">
+                                    <img src="assets/images/avatars/<?php echo $candidateData['profileImg']   ?>" class="rounded-full w-32 h-32 mx-auto shadow-lg mt-5" alt="">
+                                    <div class="text-center mb-6">
+                                        <small class="text-center text-md font-semibold text-gray-800 capitalize block mt-3"><?php echo $fullName ?></small>
+                                        <small class="text-center text-md font-semibold text-gray-800 capitalize block"><?php echo $position['spotname'] . $yrN ?></small>
+                                    </div>
+                                    <div class="text-center">
+                                        <small class="capitalize text-6xl font-semibold text-gray-800"><?php echo $contestant['votes'] - 1?><span class="text-xs">votes</span></small>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php
+                    }
+                }
+            ?>
         </marquee>
     </div>
     <div class="sm:col-span-1 sm:order-2 md:col-span-2 md:order-0 lg:order-4 lg:col-span-1 xl:col-span-2">
@@ -68,81 +80,56 @@ include_once 'backend/nav.php';
                     <div id="voteBtn"></div>
                 </div>
             </div>
-         </div>
-         <div class="">
-            <div class="text-xl font-bold">Top Performers</div>
+        </div>
+        <div class="mt-4">
+            <div class="">Current Executives</div>
             <div class="">
-                <?php
-                    $a = 0 ;
-                    while ($a <= 4) {
-                        echo '
-                            <div class="flex py-2 gap-2 items-center">
-                                <img src="../assets/images/avatars/3.jpeg" class="w-10 h-10 shadow-lg rounded-full" srcset="">
-                                <div class="capitalize flex-grow">firstname lastname</div>
-                                <div class="flex gap-2 ">
-                                    <div class="pr-6">position</div>
-                                    <div class="">69%</div>
-                                </div>
-                            </div>
-                        ';
-                        $a++;
-                    }
-                ?>
-            </div>
-            <a href="results.php" class="pt-2 font-thin">view more ></a>
-         </div>
-    </div>
-    <div class="xl:col-span-5 md:col-span-2 order-2 sm:order-0 sm:col-span-2 md:order-3 lg:order-4">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-3">
-            <div class="">
-                <div class="mt-4">
-                    <div class="">Current Executives</div>
-                    <div class="">
-                        <div class="bg-white py-2 px-1 shadow-lg rounded-lg divide-x flex">
-                            <div class="px-2">SN</div>
-                            <div class="px-2 flex-grow">Fullname</div>
-                            <div class="px-8">Position</div>
-                        </div>
-                        <?php
-                            $a = 0 ;
-                            while ($a <= 5) {
-                                echo '
-                                    <div class="bg-white py-2 px-1 shadow-lg rounded-lg divide-x flex items-center my-1">
-                                        <div class="px-2">SN</div>
-                                        <div class="px-2 flex-grow flex items-center gap-2">
-                                            <img src="../assets/images/avatars/3.jpeg" class="w-10 h-10 shadow-lg rounded-full" srcset="">
-                                            <div class="capitalize flex-grow">firstname lastname</div>
-                                        </div>
-                                        <div class="px-8">Position</div>
-                                    </div>
-                                ';
-                                $a++;
-                            }
-                        ?>
-                    </div>
+                <div class="bg-white py-2 px-1 shadow-lg rounded-lg divide-x flex">
+                    <div class="px-2">SN</div>
+                    <div class="px-2 flex-grow">Fullname</div>
+                    <div class="px-8">Position</div>
                 </div>
-            </div>
-            <div class="">
-                <div class="mt-5 grid grid-cols-1 lg:grid-cols-2 gap-3">
-                    <?php
-                        $a =0;
-                        while ($a <= 5) {
+                <?php
+                    $positionspast = $conn->query("SELECT * FROM posirtion");
+                    while ($positionpast = $positionspast->fetch_array()) {
+                        $position_idpast= $positionpast['sn'];
+                        $yrNpast=date('Y') - 1;
+                        $contestantspast = $conn->query("SELECT * FROM voteorder WHERE position='$position_idpast' AND yr='$yrNpast'  ORDER BY votes DESC LIMIT 1");
+                        if ($contestantspast->num_rows > 0) {
+                            $contestantpast = $contestantspast->fetch_array();
+                            $candidatepast = $contestantpast['userId'];
+                            $candidateDpast = $conn->query("SELECT * FROM users WHERE id ='$candidatepast'");
+                            $candidateDataPast = $candidateDpast->fetch_array();
+                            $fullNamepast = $candidateDataPast['firstname'] . ' ' . $candidateDataPast['lastname'];
                             ?>
-                                <div class="bg-white rounded-lg shadow-lg py-3 px-2">
-                                    <div class="flex gap-2 items-center">
-                                        <img src="../assets/images/avatars/3.jpeg" class="w-16 h-16 shadow-lg rounded-full" srcset="">
-                                        <div class="capitalize">firstname lastname</div>
+                                <div class="bg-white py-2 px-1 shadow-lg rounded-lg divide-x flex items-center my-1">
+                                    <div class="px-2">SN</div>
+                                    <div class="px-2 flex-grow flex items-center gap-2">
+                                        <img src="assets/images/avatars/<?php echo $candidateDataPast['profileImg']   ?>" class="w-10 h-10 shadow-lg rounded-full" srcset="">
+                                        <div class="capitalize flex-grow"><?php echo $fullNamepast ?></div>
                                     </div>
-                                    <div class="capitalize pl-3 pt-3">
-                                        head of department (HOD)
-                                    </div>
+                                    <div class="px-8"><?php echo    $positionpast['spotname']?></div>
                                 </div>
                             <?php
-                            $a++;
                         }
-                    ?>
-                    
-                </div>
+                    }
+                ?>
+                <?php
+                    // $a = 0 ;
+                    // while ($a <= 5) {
+                    //     echo '
+                    //         <div class="bg-white py-2 px-1 shadow-lg rounded-lg divide-x flex items-center my-1">
+                    //             <div class="px-2">SN</div>
+                    //             <div class="px-2 flex-grow flex items-center gap-2">
+                    //                 <img src="../assets/images/avatars/3.jpeg" class="w-10 h-10 shadow-lg rounded-full" srcset="">
+                    //                 <div class="capitalize flex-grow">firstname lastname</div>
+                    //             </div>
+                    //             <div class="px-8">Position</div>
+                    //         </div>
+                    //     ';
+                    //     $a++;
+                    // }
+                ?>
             </div>
         </div>
     </div>
