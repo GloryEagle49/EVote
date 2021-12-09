@@ -24,9 +24,9 @@ $position = $_GET['position'];
                     <?php
                         $position_id= $position;
                         $yrN=date('Y');
-                        $contestants = $conn->query("SELECT * FROM contestants WHERE position ='$position_id' AND yr='$yrN'");
+                        $contestants = $conn->query("SELECT * FROM voteorder WHERE position='$position_id' AND yr='$yrN' ORDER BY votes DESC");
                         while ($contestant = $contestants->fetch_array()) {
-                            $contId = $contestant['userid'];
+                            $contId = $contestant['userId'];
                             $person = $conn->query("SELECT * FROM users WHERE id ='$contId'");
                             $pesd=$person->fetch_array();
                             ?>
@@ -39,7 +39,7 @@ $position = $_GET['position'];
                                             <div class="">
                                                 <?php
                                                     $getVote = $conn->query("SELECT * FROM votes WHERE votefor='$contId' AND position='$position_id' AND yr='$yrN'");
-                                                    echo $getVote->num_rows;
+                                                    echo $getVote->num_rows - 1;
                                                 ?>
                                             </div>
                                         </div>
@@ -56,6 +56,8 @@ $position = $_GET['position'];
                 </form>
             </div>
         </div>
-        <div class="bg--800">df</div>
+        <div class="bg--800">
+            dfg
+        </div>
     </div>
 </div>

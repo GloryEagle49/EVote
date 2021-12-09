@@ -91,6 +91,7 @@
         $position = $_POST['position'];
         $level = $_POST['level'];
         $logged = $conn->query("INSERT INTO contestants (userid,position,level)VALUE('$getreg','$position','$level')");
+        $conn->query("INSERT INTO votes (votefor,voter,position)VALUE('$getreg','0','$position')");
         if($logged){
             echo json_encode([
                 'msg'=>'logged successfully'
@@ -183,6 +184,35 @@
         }
     }else{
 
+    }
+
+    $yrN=date('Y');
+    $arry = [];
+    $query = $conn->query("SELECT * FROM votes WHERE yr='$yrN'");
+    while($users = $query->fetch_assoc()){
+        if(in_array($users['votefor'],$arry)){}else {
+            array_push($arry,$users['votefor']);
+        }
+    }
+    update($conn,$arry);
+    function update($conn,$arry){
+        $yrN=date('Y');
+        $a = 0 ;
+        while ($a < count($arry) ) {
+            $nID = $arry[$a];
+            $a++;
+            $queryW = $conn->query("SELECT * FROM votes WHERE votefor='$nID'");
+            $qDAtaw=$queryW->fetch_assoc();
+            $position = $qDAtaw['position'];
+            $numVotes = $queryW->num_rows;
+            $queryd = $conn->query("SELECT * FROM voteorder WHERE userId='$nID'");
+            if($queryd->num_rows > 0){
+                $log = $conn->query("UPDATE voteorder SET votes = '$numVotes' WHERE userId='$nID' AND yr='$yrN'");
+            }else {
+                $log = $conn->query("INSERT INTO voteorder (userId,position,yr,votes)VALUE('$nID','$position','$yrN','$numVotes')");
+            }
+            
+        }
     }
 
 

@@ -39,10 +39,10 @@
                             <?php
                                 $position_id= $position['sn'];
                                 $yrN=date('Y');
-                                $contestants = $conn->query("SELECT * FROM contestants WHERE position ='$position_id' AND yr='$yrN' LIMIT 3");
+                                $contestants = $conn->query("SELECT * FROM voteorder WHERE position='$position_id' AND yr='$yrN'  ORDER BY votes DESC LIMIT 3");
                                 if ($contestants->num_rows > 0) {
                                     while ($contestant = $contestants->fetch_array()) {
-                                        $candidate = $contestant['userid'];
+                                        $candidate = $contestant['userId'];
                                         $candidateD = $conn->query("SELECT * FROM users WHERE id ='$candidate'");
                                         $candidateData = $candidateD->fetch_array();
                                         $fullName = $candidateData['firstname'] . ' ' . $candidateData['lastname'];
@@ -54,7 +54,7 @@
                                                     <div class="">
                                                     <?php
                                                         $getVote = $conn->query("SELECT * FROM votes WHERE votefor='$candidate' AND position='$position_id' AND yr='$yrN'");
-                                                            echo $getVote->num_rows;
+                                                            echo $getVote->num_rows - 1;
                                                         ?>
                                                     </div>
                                                 </div>
