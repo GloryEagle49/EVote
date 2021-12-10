@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 09, 2021 at 06:44 PM
--- Server version: 10.4.19-MariaDB
--- PHP Version: 7.4.19
+-- Generation Time: Dec 10, 2021 at 11:00 AM
+-- Server version: 10.4.20-MariaDB
+-- PHP Version: 7.4.22
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -57,14 +57,11 @@ CREATE TABLE `posirtion` (
 INSERT INTO `posirtion` (`sn`, `spotname`, `time`) VALUES
 (2, 'President', '2021-12-09 15:37:44'),
 (3, 'Vice President', '2021-12-09 15:37:57'),
-(4, 'Sec Gen', '2021-12-09 15:38:46'),
-(5, 'Assistant Sec Gen', '2021-12-09 15:39:43'),
 (6, 'Walfare', '2021-12-09 15:39:50'),
 (7, 'Sports Dircetor', '2021-12-09 15:40:07'),
 (8, 'Director Of Socials', '2021-12-09 15:40:27'),
 (9, 'Publicity', '2021-12-09 15:40:42'),
 (10, 'ICT Director', '2021-12-09 15:40:57'),
-(11, 'Assistant ICT Director', '2021-12-09 15:41:13'),
 (12, 'Financial Secretary', '2021-12-09 15:43:36'),
 (13, 'Assistant Financial Secretary', '2021-12-09 15:43:44');
 
@@ -185,7 +182,7 @@ CREATE TABLE `votep` (
 --
 
 INSERT INTO `votep` (`sn`, `timeerh`, `timeerm`, `timeers`, `timeState`, `yr`) VALUES
-(1, 60, 0, 0, 1, 2021);
+(1, 60, 0, 0, 2, 2021);
 
 -- --------------------------------------------------------
 
