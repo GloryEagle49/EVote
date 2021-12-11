@@ -42,8 +42,9 @@ $(document).ready(function () {
             data: $data,
             dataType:'json',
             success: function(res){
-                console.log(res);
+                alert(res)
                 $formData.trigger('reset')
+
             }
         })
     });
@@ -165,4 +166,44 @@ $(document).ready(function () {
         })
     })
 
+
+    setInterval(() => {
+        $.ajax({
+            type: 'post',
+            url:'checkTimeState.php',
+            dataType:'json',
+            success: function(res2){
+                if(res2.status == '1'){
+                    $data = {time:res2.time}
+                    $.ajax({
+                        type: 'post',
+                        url:'time.php',
+                        data:$data,
+                        dataType:'html',
+                        success: function(res2){
+                            $('.timing').text(res2)
+                        }
+                    })
+                    $.ajax({
+                        type: 'post',
+                        url:'updateTime.php',
+                        data:$data,
+                    })
+                }else if(res2.status == '2'){
+                    $data = {time:res2.time}
+                    $.ajax({
+                        type: 'post',
+                        url:'time.php',
+                        data:$data,
+                        dataType:'html',
+                        success: function(res3){
+                            $('.timing').text(res3)
+                        }
+                    })
+                }else{
+                    $('.timing').text('00:00:00')
+                }
+            }
+        })
+    }, 1000);
 })

@@ -12,7 +12,7 @@
         <div class="">
             <div class="">Voting time left</div>
             <div class="text-4xl">
-                <span>00:00:00</span>
+                <span class="timing"></span>
                 <span id="progressStatus"></span>
             </div>
         </div>
