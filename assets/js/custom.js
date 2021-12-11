@@ -107,7 +107,49 @@ $(document).ready(function () {
     $url = new URL(window.location);
     $pathArray = $url.pathname.split('/');
     $current_page = $pathArray.pop();
-    if($current_page == 'index.php' || 'ElectionMode.php'){
+    if($current_page == 'ElectionMode.php'){ 
+        setInterval(() => {
+            $.ajax({
+                url:'../electionprogress.php',
+                dataType:'html',
+                success: function(res){
+                    $data = {'state':res};
+                    $.ajax({
+                        type:'post',
+                        url:'../displayprogress.php',
+                        data:$data,
+                        dataType:'html',
+                        success:function(res2){
+                            $('#progressStatus').html(res2)
+                        }
+                        
+                    });
+                    $.ajax({
+                        url:'../voteBtn.php',
+                        dataType:'html',
+                        success:function(re){
+                            var ret = localStorage.voteBnt
+                            if(re != ret){
+                                ret = re
+                                $('#voteBtn').html(ret)
+                            }
+                        }
+                    });
+                    $.ajax({
+                        type:'post',
+                        url:'../displayprogress.php',
+                        data:$data,
+                        dataType:'html',
+                        success:function(res2){
+                            $('#progressStatus').html(res2)
+                        }
+                        
+                    });
+                }
+            })
+        }, 1000);
+    }
+    if($current_page == 'index.php'){
         setInterval(() => {
             $.ajax({
                 url:'../electionprogress.php',
