@@ -5,11 +5,11 @@ include_once 'backend/nav.php';
 <div class="md:ml-72 px-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-5 gap-6 lg:px-5 py-5">
     <div class="order-2 sm:order-0 md:order-3 lg:order-4 sm:col-span-1 md:col-span-2 lg:col-span-1 xl:col-span-3">
         <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3 gap-3">
-            <div class="py-4 bg-blue-700 shadow-lg rounded-lg text-white px-4 divide-y">
+            <div class="py-4 bg-yellow-200 shadow-lg rounded-lg text-white px-4 divide-y">
                 <div class="text-xs py-2">Total Number of eligible voters</div>
                 <div class="text-5xl py-3">2300</div>
             </div>
-            <div class="py-4 bg-yellow-300 shadow-lg rounded-lg text-white px-4 divide-y">
+            <div class="py-4 bg-purple-300 shadow-lg rounded-lg text-white px-4 divide-y">
                 <div class="text-xs py-2">Total Number of Vote</div>
                 <div class="text-5xl py-3">130</div>
             </div>
@@ -35,7 +35,7 @@ include_once 'backend/nav.php';
                         $candidateData = $candidateD->fetch_array();
                         $fullName = $candidateData['firstname'] . ' ' . $candidateData['lastname'];
                         ?>
-                            <div class="p-3 inline-block mx-3 mb-3 rounded-lg h-96 shadow-lg w-64 bg-green-200">
+                            <div class="p-3 inline-block mx-3 mb-3 rounded-lg h-96 shadow-lg w-64 bg-blue-200">
                                 <div class="py-5 mb-3">
                                     <img src="assets/images/avatars/<?php echo $candidateData['profileImg']   ?>" class="rounded-full w-32 h-32 mx-auto shadow-lg mt-5" alt="">
                                     <div class="text-center mb-6">
@@ -132,27 +132,27 @@ include_once 'backend/nav.php';
                 <div class="relative -top-3 hidden">
                     <div class="option-container w-full absolute border bg-white cursor-pointer text-gray-800 z-20">
                         <div class="option hover:bg-blue-400 cursor-pointer hover:text-white">
-                            <input value="60" type="radio" class="radio appearance-none hidden" required id="2" name="duration">
+                            <input value="3600" type="radio" class="radio appearance-none hidden" required id="2" name="duration">
                             <label for="2" class="block px-4 cursor-pointer py-1 selector-list">1 Hour</label>
                         </div>
                         <div class="option hover:bg-blue-400 cursor-pointer hover:text-white">
-                            <input value="90" type="radio" class="radio appearance-none hidden" required id="3" name="duration">
+                            <input value="5400" type="radio" class="radio appearance-none hidden" required id="3" name="duration">
                             <label for="3" class="block px-4 cursor-pointer py-1 selector-list">1 Hour 30 minutes</label>
                         </div>
                         <div class="option hover:bg-blue-400 cursor-pointer hover:text-white">
-                            <input value="120" type="radio" class="radio appearance-none hidden" required id="me" name="duration">
+                            <input value="7200" type="radio" class="radio appearance-none hidden" required id="me" name="duration">
                             <label for="me" class="block px-4 cursor-pointer py-1 selector-list">2 Hours</label>
                         </div>
                         <div class="option hover:bg-blue-400 cursor-pointer hover:text-white">
-                            <input value="150" type="radio" class="radio appearance-none hidden" required id="2" name="duration">
+                            <input value="9000" type="radio" class="radio appearance-none hidden" required id="2" name="duration">
                             <label for="2" class="block px-4 cursor-pointer py-1 selector-list">2 Hours 30 minutes</label>
                         </div>
                         <div class="option hover:bg-blue-400 cursor-pointer hover:text-white">
-                            <input value="180" type="radio" class="radio appearance-none hidden" required id="3" name="duration">
+                            <input value="10800" type="radio" class="radio appearance-none hidden" required id="3" name="duration">
                             <label for="3" class="block px-4 cursor-pointer py-1 selector-list">3 Hours</label>
                         </div>
                         <div class="option hover:bg-blue-400 cursor-pointer hover:text-white">
-                            <input value="210" type="radio" class="radio appearance-none hidden" required id="me" name="duration">
+                            <input value="12600" type="radio" class="radio appearance-none hidden" required id="me" name="duration">
                             <label for="me" class="block px-4 cursor-pointer py-1 selector-list">3 hours 30 minutes</label>
                         </div>
                     </div>
