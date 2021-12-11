@@ -114,7 +114,6 @@
                 'msg'=>'setime'
             ]);
         }
-
     }elseif ($action == 'startElection') {
         $duration = $_POST['duration'];
         $logged = $conn->query("INSERT INTO votep (timeerh)VALUE('$duration')");
@@ -135,7 +134,7 @@
                 'msg'=>'deleted'
             ]);
         }
-    }elseif ($action == 'startN') {
+    }elseif ($action == 'startN') { 
         $perform = $_POST['perform'];
         $yr =date('Y');
         $query = $conn->query("UPDATE votep SET timeState = '$perform' WHERE yr='$yr'");
